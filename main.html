@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="contacts">
+        <a href="https://discord.gg/jTV2yX6rBB" id="discord">Discord</a><a> |</a>
+        <a href="https://www.youtube.com/channel/UCOAYLFQDmFOfYSIUrHN0JGA" id="youtube">youtube</a><a> |</a>
+    </div>
+    <div id="game">
+        <div id="canvas">
+            <div id="cookiecontainer">
+                <p id="cookiecount"></p>
+            </div>
+            <img onclick="add()" id="hi" src="./spinningcookie.gif" width="250" height="150"><hr>
+            <button onclick="upgrade()" id="upgradebutton">Upgrade</button>
+            <div id="notification">
+                <hr><button onclick="autoclickbuy()" id="upgradebutton2">Auto-clicker</button><br><hr>
+                <p id="notification2"></p><br><hr>
+                <p id="notification4"></p><br><hr>
+                <p id="notification5"></p><br><hr>
+                <p id="howmuchuntilupgrade"></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <script>
+        let cookies = 0
+        let upgrades = 1
+        let upgradecost = upgrades * 20
+        let multiplier = 1 + upgrades * 0.1
+        canvas = document.getElementById('canvas')
+        game = document.getElementById('game')
+        cookieimg = document.getElementById('cookie')
+        cookiecount = document.getElementById('cookiecount')
+        howmuchuntilupgrade = document.getElementById('howmuchuntilupgrade')
+        notification1 = document.getElementById("notification1")
+        notification2 = document.getElementById("notification2")
+        notification3 = document.getElementById("notification3")
+        notification4 = document.getElementById("notification4")
+        notification5 = document.getElementById("notification5")
+        howmuchuntilupgrade.textContent = "cookies until upgrade: " + upgradecost
+        canvas.style.height = window.innerHeight.toLocaleString() + "px"
+        canvas.style.width = "250px"
+        game.style.border = "solid 2px black"
+        canvas.style.border = "solid 2px black"
+        cookiecount.style.fontSize = "20px"
+        cookiecount.style.textAlign = "center"
+        cookiecount.textContent =  "cookies: " + cookies.toLocaleString()
+        cookieimg.onclick() = add() 
+        function refreshcookies(){
+            document.querySelector('title').textContent = cookies.toLocaleString() + " cookies"
+            cookiecount.textContent =  "cookies: " + cookies.toLocaleString()
+            if(cookies == upgradecost || cookies > upgradecost){
+                howmuchuntilupgrade.textContent = "upgrade available!"
+            }else{
+                howmuchuntilupgrade.textContent = "cookies until upgrade: " + (upgradecost - cookies).toLocaleString()
+            }
+        }
+        function add(){
+            cookies += multiplier 
+            console.log("cookie number: " + cookies + " pressed")
+            refreshcookies()
+        }
+        function reset1(){
+            notification1.textContent = ""
+        }
+        function upgrade(){
+            if(cookies == upgradecost || cookies > upgradecost){
+                cookies -= upgradecost 
+                multiplier += 0.1
+                upgrades += 1
+                upgradecost = upgrades * 20
+                refreshcookies()
+            }else{
+                notification1.textContent = "you must have " + (upgradecost).toLocaleString() + " cookies"
+                setTimeout(reset1, 3000)
+            }
+        }
+    </script>
+    <style>
+        body{
+            text-align: center;
+        }
+        #cookiecontainer{
+            font-family: 'Poppins', sans-serif;
+            border: solid 2px rgb(70, 69, 69);
+            background-color: rgb(219, 216, 216);
+            color: rgb(218, 15, 15);
+            opacity: 1;
+        }
+        #cookiecount{
+            opacity: 10;
+        }
+        #hi{
+            background-color: gold;
+            width: 247.5px;
+            height: 200px;
+        }
+        #contacts{
+            width: 100%;
+            height: 100%;
+            border: solid 2px black;
+            background-color: white;
+            color: black;
+        }
+        #discord{
+            border: solid 1px black;
+            background-color: darkblue;
+            color: white;
+        }
+        #youtube{
+            border: solid 1px black;
+            background-color: darkblue;
+            color: white;
+        }
+        #discord:hover{
+            color: blueviolet;
+        }
+        #youtube:hover{
+            color: red;
+        }
+        #game{
+            width: 100%;
+            height: 100%;
+        }
+        #upgradebutton{
+            width: 100%;
+            height: 10%;
+            background-color: rgb(14, 191, 223);
+        }
+        #upgradebutton:hover{
+            background: url("./spinningcookie.gif") 0 0;
+            color: lightblue;
+        }
+        #upgradebutton2{
+            width: 100%;
+            height: 70px;
+            background-color: rgb(14, 191, 223);
+        }
+        #upgradebutton2:hover{
+            background: url("./spinningcookie.gif") 0 0;
+            color: lightblue;
+        }
+        #gif{
+            width: 100px;
+            height: 100px;
+        }
+        #animations{
+            border: solid 2px black;
+            margin: 100px;
+        }
+    </style>
+</body>
+</html>
